@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ayrton</title>
+    <link rel="stylesheet" href="/styles/styles2.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .spinner {
+            display: none; 
+            position: absolute;
+            width: 9px;
+            height: 9px;
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%);
+        }
+
+        .spinner div {
+            position: absolute;
+            width: 50%;
+            height: 150%;
+            background: #000000;
+            transform: rotate(calc(var(--rotation) * 1deg)) translate(0, calc(var(--translation) * 1%));
+            animation: spinner-fzua35 1s calc(var(--delay) * 1s) infinite ease;
+        }
+
+        .spinner div:nth-child(1) {
+            --delay: 0.1;
+            --rotation: 36;
+            --translation: 150;
+        }
+
+        .spinner div:nth-child(2) {
+            --delay: 0.2;
+            --rotation: 72;
+            --translation: 150;
+        }
+
+        .spinner div:nth-child(3) {
+            --delay: 0.3;
+            --rotation: 108;
+            --translation: 150;
+        }
+
+        .spinner div:nth-child(4) {
+            --delay: 0.4;
+            --rotation: 144;
+            --translation: 150;
+        }
+
+        .spinner div:nth-child(5) {
+            --delay: 0.5;
+            --rotation: 180;
+            --translation: 150;
+        }
+
+        .spinner div:nth-child(6) {
+            --delay: 0.6;
+            --rotation: 216;
+            --translation: 150;
+        }
+
+        .spinner div:nth-child(7) {
+            --delay: 0.7;
+            --rotation: 252;
+            --translation: 150;
+        }
+
+        .spinner div:nth-child(8) {
+            --delay: 0.8;
+            --rotation: 288;
+            --translation: 150;
+        }
+
+        .spinner div:nth-child(9) {
+            --delay: 0.9;
+            --rotation: 324;
+            --translation: 150;
+        }
+
+        .spinner div:nth-child(10) {
+            --delay: 1;
+            --rotation: 360;
+            --translation: 150;
+        }
+
+        @keyframes spinner-fzua35 {
+            0%, 10%, 20%, 30%, 50%, 60%, 70%, 80%, 90%, 100% {
+                transform: rotate(calc(var(--rotation) * 1deg)) translate(0, calc(var(--translation) * 1%));
+            }
+            50% {
+                transform: rotate(calc(var(--rotation) * 1deg)) translate(0, calc(var(--translation) * 1.5%));
+            }
+        }
+
+        .hidden-content {
+            display: none; 
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .input-error {
+            border-color: red;
+        }
+    </style>
+</head>
+<body class="body3">
+<div class="login-container" id="content">
+    <h1 class="title">Ayrton</h1>
+    <h2 class="subtitle">Inicia Sesión</h2>
+
+    <form class="login-form" id="loginForm" novalidate>
+        <input id="email" type="email" placeholder="Introduce tu correo" required>
+        <p id="emailError" class="error">Por favor, introduce un correo válido.</p>
+        <input id="password" type="password" placeholder="Introduce tu contraseña" required minlength="6">
+        <p id="passwordError" class="error">La contraseña debe tener al menos 6 caracteres.</p>
+        <button type="submit" class="btn-continuar">Continuar</button>
+    </form>
+
+    <p class="continue-with">O continua con :</p>
+
+    <div class="social-login">
+        <a class="btn-social" href="https://accounts.google.com">Google</a>
+        <a class="btn-social" href="https://login.live.com">Microsoft</a>
+        <a class="btn-social" href="https://account.apple.com">Apple</a>
+    </div>
+
+    <div class="footer3">
+        <a href="#" class="help-link">¿No puedes iniciar sesión?</a>
+        <span class="separator"> + </span>
+        <a href="/paginas/registro.html" class="create-account-link">Crear una cuenta</a>
+    </div>
+
+    <p class="brand-footer">Ayrton</p>
+</div>
+
+<div class="spinner" id="loader">
+    <div></div>   
+    <div></div>    
+    <div></div>    
+    <div></div>    
+    <div></div>    
+    <div></div>    
+    <div></div>    
+    <div></div>    
+    <div></div>    
+    <div></div>    
+</div>
+
+<script>
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const emailError = document.getElementById("emailError");
+    const passwordError = document.getElementById("passwordError");
+
+  
+    let successfulAttempts = localStorage.getItem("successfulAttempts") || 0;
+
+    document.getElementById("loginForm").addEventListener("submit", function (event) {
+    let valid = true;
+
+  
+    if (!emailInput.value || !/\S+@\S+\.\S+/.test(emailInput.value)) {
+        emailError.style.display = "block";
+        emailInput.classList.add("input-error");
+        valid = false;
+    } else {
+        emailError.style.display = "none";
+        emailInput.classList.remove("input-error");
+    }
+
+    // Validación de la contraseña
+    if (!passwordInput.value || passwordInput.value.length < 6) {
+        passwordError.style.display = "block";
+        passwordInput.classList.add("input-error");
+        valid = false;
+    } else {
+        passwordError.style.display = "none";
+        passwordInput.classList.remove("input-error");
+    }
+
+    if (!valid) {
+        event.preventDefault();
+        return;
+    }
+
+    event.preventDefault();
+    document.getElementById("content").classList.add("hidden-content");
+    const loader = document.getElementById("loader");
+    loader.style.display = "block";
+
+    setTimeout(function () {
+        // Puedes comentar esta lógica si no necesitas controlar intentos.
+        successfulAttempts = parseInt(successfulAttempts) + 1; 
+        localStorage.setItem("successfulAttempts", successfulAttempts);
+
+        // Redirige al dashboard
+        window.location.href = "/paginas/dashboard.html";
+    }, 2000);
+});
+</script>
+</body>
+</html>

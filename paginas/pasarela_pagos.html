@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <link rel="stylesheet" href="/styles/style9.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <form>
+            <div class="row">
+                <div class="column">
+                    <h3 class="pasarela">Datos Personales</h3>
+                    <div class="input_box">
+                        <span>Nombre completo</span>
+                        <input type="text" id="nombre_completo" name="nombre_completo" required>
+                    </div>
+                    <div class="input_box">
+                        <span>Correo electrónico</span>
+                        <input type="email" id="correo_electronico" name="correo_electronico" required>
+                    </div>
+                    <div class="input_box">
+                        <span>Teléfono</span>
+                        <input type="text" id="telefono" name="telefono" required>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <h3 class="pasarela">Pasarela de Pagos</h3>
+                    <img src="/imagenes/imgcards.png" alt="Tarjetas" class="img_cards">
+                    <div class="input_box">
+                        <span>Tipo de Documento</span>
+                        <select id="tipo_documento" name="tipo_documento" required>
+                            <option value="">Selecciona tu tipo de documento</option>
+                            <option value="CC">Cédula de Ciudadanía</option>
+                            <option value="CE">Cédula de Extranjería</option>
+                            <option value="TI">Tarjeta de Identidad</option>
+                        </select>
+                    </div>
+                    <div class="input_box">
+                        <span>Número de Documento</span>
+                        <input type="text" id="numero_documento" name="numero_documento" required>
+                    </div>
+                    <div class="input_box">
+                        <span>Seleccione su plan</span>
+                        <select id="plan" name="plan" required>
+                            <option value="">Selecciona un Plan</option>
+                            <option value="premium">Plan Premium</option>
+                            <option value="platino">Plan Platino</option>
+                        </select>
+                    </div>
+                    <div class="input_box">
+                        <span>Selecciona tu tipo de pago</span>
+                        <select id="tipo_pago" name="tipo_pago" required>
+                            <option value="mensual">Mensualidad</option>
+                            <option value="anual">Anualidad</option>
+                        </select>
+                    </div>
+                    <div class="input_box" id="precio_box">
+                        <span>Precio</span>
+                        <input type="text" id="precio" name="precio" value="20.000 pesos" readonly>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn">Enviar</button>
+        </form>
+    </div>
+
+    <script>
+
+        const planSelect = document.getElementById('plan');
+        const tipoPagoSelect = document.getElementById('tipo_pago');
+        const precioInput = document.getElementById('precio');
+
+  
+        function actualizarPrecio() {
+            let precio = 0;
+
+            if (planSelect.value === 'premium') {
+                precio = tipoPagoSelect.value === 'mensual' ? 20000 : 240000;
+            } else if (planSelect.value === 'platino') {
+                precio = tipoPagoSelect.value === 'mensual' ? 40000 : 480000;
+            }
+
+            precioInput.value = `${precio.toLocaleString()} pesos`;
+        }
+
+     
+        planSelect.addEventListener('change', actualizarPrecio);
+        tipoPagoSelect.addEventListener('change', actualizarPrecio);
+
+       
+        actualizarPrecio();
+    </script>
+</body>
+</html>

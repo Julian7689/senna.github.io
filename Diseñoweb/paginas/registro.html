@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro en Ayrton</title>
+    <link rel="stylesheet" href="/styles/styles3.css"> 
+</head>
+<body>
+
+    <div class="register-container">
+        <h2 class="title"> Ayrton</h2>
+        <p class="subtitle">Completa los datos para crear tu cuenta.</p>
+
+        <form id="registroForm" class="register-form">
+            <!-- Nombre Completo -->
+            <div class="form-section">
+                <label for="nombre" class="form-label">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" class="form-input" required placeholder="Ingresa tu nombre completo">
+                <small class="error-message" id="nombreError"></small>
+            </div>
+       
+            <div class="form-section">
+                <label for="apellido" class="form-label">Apellido:</label>
+                <input type="text" id="apellido" name="apellido" class="form-input" required placeholder="Ingresa tu apellido">
+                <small class="error-message" id="apellidoError"></small>
+            </div>
+
+            <div class="form-section">
+                <label for="email" class="form-label">Correo Electrónico:</label>
+                <input type="email" id="email" name="email" class="form-input" required placeholder="Correo electrónico">
+                <small class="error-message" id="emailError"></small>
+            </div>
+
+   
+            <div class="form-section">
+                <label for="password" class="form-label">Contraseña:</label>
+                <input type="password" id="password" name="password" class="form-input" required placeholder="20 caracteres entre letras y caracteres">
+                <small class="error-message" id="passwordError"></small>
+            </div>
+
+            <div class="form-section">
+                <label for="confirmPassword" class="form-label">Confirmar Contraseña:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" class="form-input" required placeholder="Confirma tu contraseña">
+                <small class="error-message" id="confirmPasswordError"></small>
+            </div>
+
+          
+            <div class="form-section">
+                <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento:</label>
+                <input type="date" id="fechaNacimiento" name="fechaNacimiento" class="form-input" required>
+                <small class="error-message" id="fechaNacimientoError"></small>
+            </div>
+
+     
+            <div class="form-section">
+                <label for="notificaciones" class="form-label">¿Deseas recibir notificaciones?</label>
+                <select id="notificaciones" name="notificaciones" class="form-input" required>
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+
+   
+            <div class="form-section">
+                <label for="pago" class="form-label">Método de Pago (opcional):</label>
+                <input type="text" id="pago" name="pago" class="form-input" placeholder="Número de tarjeta o método preferido">
+            </div>
+
+            <button type="submit" class="btn-continuar">Registrar</button>
+        </form>
+
+        <div class="footer">
+            <p><a href="#" class="help-link">¿Necesitas ayuda?</a></p>
+            <p><span class="separator">|</span> <a href="#" class="create-account-link">Crear una cuenta nueva</a></p>
+        </div>
+
+        <div class="brand-footer">
+            Ayrton - Gestión de Tiempo
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('registroForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            let isValid = true;
+
+     
+            const nombre = document.getElementById('nombre').value;
+            if (nombre.trim().length < 2) {
+                document.getElementById('nombreError').innerText = 'El nombre debe tener al menos 2 caracteres';
+                isValid = false;
+            } else {
+                document.getElementById('nombreError').innerText = '';
+            }
+
+     
+            const apellido = document.getElementById('apellido').value;
+            if (apellido.trim().length < 2) {
+                document.getElementById('apellidoError').innerText = 'El apellido debe tener al menos 2 caracteres';
+                isValid = false;
+            } else {
+                document.getElementById('apellidoError').innerText = '';
+            }
+
+            const email = document.getElementById('email').value;
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                document.getElementById('emailError').innerText = 'Por favor ingresa un correo válido';
+                isValid = false;
+            } else {
+                document.getElementById('emailError').innerText = '';
+            }
+
+      
+            const password = document.getElementById('password').value;
+            if (password.length < 8 || !/[!@#$%^&*]/.test(password)) {
+                document.getElementById('passwordError').innerText = 'La contraseña debe tener al menos 8 caracteres y un símbolo';
+                isValid = false;
+            } else {
+                document.getElementById('passwordError').innerText = '';
+            }
+
+          
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            if (password !== confirmPassword) {
+                document.getElementById('confirmPasswordError').innerText = 'Las contraseñas no coinciden';
+                isValid = false;
+            } else {
+                document.getElementById('confirmPasswordError').innerText = '';
+            }
+
+            const fechaNacimiento = new Date(document.getElementById('fechaNacimiento').value);
+            const hoy = new Date();
+            const edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+            if (edad < 18 || isNaN(fechaNacimiento)) {
+                document.getElementById('fechaNacimientoError').innerText = 'Debes ser mayor de 18 años';
+                isValid = false;
+            } else {
+                document.getElementById('fechaNacimientoError').innerText = '';
+            }
+
+            if (isValid) {
+                alert('Registro exitoso');
+                this.submit();
+            }
+        });
+    </script> 
+</body>
+</html>

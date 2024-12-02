@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+:root {
+    --clr-primary: #7380ec;
+    --clr-danger: #ff7782;
+    --clr-success: #41f1b6;
+    --clr-white: #fff;
+    --clr-info-dark: #7d8da1;
+    --clr-info-light: #dce1eb;
+    --clr-dark: #363949;
+    --clr-warning: #ff4edc;
+    --clr-light: rgba(132, 139, 200, 0.18);
+    --clr-color-background: #f6f6f9;
+    --card-border-radius: 1rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 0.8rem;
+    --border-radius-3: 1.2rem;
+    --card-padding: 1.5rem;
+    --box-shadow: 0 2rem 3rem var(--clr-light);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: 0;
+    list-style: none;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--clr-color-background);
+    color: var(--clr-dark);
+    display: flex;
+    height: 100vh;
+    overflow-x: hidden;
+    justify-content: center;
+}
+
+main {
+    width: 90%;
+    max-width: 1500px;
+    background-color: var(--clr-white);
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    box-shadow: var(--box-shadow);
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.task-creation {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.task-creation input[type="text"],
+.task-creation select {
+    padding: 0.8rem;
+    border: 1px solid var(--clr-info-dark);
+    border-radius: var(--border-radius-1);
+    font-size: 1rem;
+}
+
+.task-creation button {
+    padding: 0.8rem;
+    background-color: var(--clr-primary);
+    color: var(--clr-white);
+    border: none;
+    border-radius: var(--border-radius-1);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.task-creation button:hover {
+    background-color: darken(var(--clr-primary), 10%);
+}
+
+.task-list {
+    margin-top: 2rem;
+}
+
+.task-list h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+#taskContainer {
+    background-color: var(--clr-info-light);
+    border-radius: var(--border-radius-2);
+    padding: 1rem;
+}
+
+#taskContainer li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--clr-info-dark);
+}
+
+#taskContainer li button {
+    background-color: var(--clr-success);
+    color: var(--clr-white);
+    border: none;
+    border-radius: var(--border-radius-1);
+    cursor: pointer;
+    padding: 0.3rem 0.6rem;
+    transition: background-color 0.3s ease;
+}
+
+#taskContainer li button:hover {
+    background-color: darken(var(--clr-success), 10%);
+}
+
+.task-progress {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.progress {
+    position: relative;
+   
+}
+.task-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.task-creation {
+    flex: 1;
+    background-color: var(--clr-white);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.task-list {
+    flex: 1;
+    background-color: var(--clr-info-light);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    overflow-y: auto;
+    max-height: 400px; /* Limita la altura */
+}
+
+.task-list h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+#taskContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#taskContainer .task-day {
+    background-color: var(--clr-white);
+    padding: 1rem;
+    border-radius: var(--border-radius-2);
+    box-shadow: var(--box-shadow);
+}
+
+#taskContainer .task-day h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+#taskContainer .task-day ul {
+    list-style: none;
+    padding: 0;
+}
+
+#taskContainer .task-day li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--clr-light);
+    padding: 0.5rem;
+    border-radius: var(--border-radius-1);
+}
+
+#taskContainer .task-day li button {
+    padding: 0.3rem 0.6rem;
+    border: none;
+    border-radius: var(--border-radius-1);
+    background-color: var(--clr-danger);
+    color: var(--clr-white);
+    cursor: pointer;
+    font-size: 0.8rem;
+}
